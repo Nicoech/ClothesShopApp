@@ -1,14 +1,16 @@
 import Home from "./routes/home/home.component";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./routes/nav-bar/NavBar.components";
-import SignIn from "./routes/sign-in/sign-in.components";
+import Authentication from "./routes/auth/authentication.component";
 
-const App = () => {
+const App = () =>
+{
+
   return (
     <Routes>
       <Route path="/" element={<NavBar />}>
         <Route index element={<Home />} />
-        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/auth" element={<Authentication />} />
       </Route>
     </Routes>
   );
