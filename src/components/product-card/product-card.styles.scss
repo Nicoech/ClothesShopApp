@@ -23,7 +23,6 @@
     position: absolute;
     top: 255px;
     display: none;
-    border-radius: 20px;
   }
 
   &:hover
@@ -31,6 +30,7 @@
     img
     {
       opacity: 0.8;
+      transition: 800ms;
     }
 
     button
@@ -47,6 +47,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 18px;
+
 
     .name
     {
