@@ -2,13 +2,12 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.styles.scss";
 import "../button/button.styles.scss";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
   signInWithGooglePopUp,
-  createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
+  signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 
@@ -19,8 +18,6 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
-
-
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -29,57 +26,51 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-
   const signInWithGoogle = async () => {
-      
-      const { user } = await signInWithGooglePopUp();
+    await signInWithGooglePopUp();
 
-      if (!user) return;
+    window.location.replace("/");
 
-      await createUserDocumentFromAuth(user);
-
-      toast('Login with Google Account Successful!', {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
-      });
-
+    toast("Login with Google Account Successful!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      className: "toast-message",
+    });
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try
     {
+      await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
 
-      await signInAuthUserWithEmailAndPassword(email, password);
+      window.location.replace("/");
 
-      
-      toast('Login successful!', {
+      toast("Login successful!", {
         position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
+        className: "toast-message",
       });
 
       resetFormFields();
-
-    } catch (error) {
-      
+    } catch (error)
+    {
       switch (error.code)
       {
         case "auth/wrong-password":
-          toast.error('Incorrect Password', {
-            position: toast.POSITION.BOTTOM_RIGHT
+          toast.error("Incorrect Password", {
+            position: toast.POSITION.BOTTOM_RIGHT,
           });
           break;
         case "auth/user-not-found":
-          toast.error('User doesn`t exist', {
+          toast.error("User doesn`t exist", {
             position: toast.POSITION.BOTTOM_RIGHT,
-            className: 'toast-message'
           });
           break;
         default:
           console.log(error);
-        
       }
-  
     }
   };
 
@@ -88,7 +79,6 @@ const SignInForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  
   return (
     <div className="sign-in-container">
       <h3>Already have an account? </h3>
@@ -118,15 +108,13 @@ const SignInForm = () => {
             SIGN IN
           </Button>
           <Button type="button" buttonType="google" onClick={signInWithGoogle}>
-            GOOGLE SIGN IN 
+            GOOGLE SIGN IN
           </Button>
           <div>
-          <ToastContainer className='toast-message'/>
+            <ToastContainer className="toast-message" />
           </div>
-     
         </div>
       </form>
-      
     </div>
   );
 };

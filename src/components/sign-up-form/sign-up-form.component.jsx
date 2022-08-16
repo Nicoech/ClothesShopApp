@@ -1,10 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import "./sign-up-form.styles.scss";
 import "../button/button.styles.scss";
-
 import {
-  signInWithGooglePopUp,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
@@ -96,7 +93,6 @@ const SignUpForm = () => {
         <Button buttonType={"inverted"} type="submit">
           SIGN UP
         </Button>
-
       </form>
     </div>
   );
