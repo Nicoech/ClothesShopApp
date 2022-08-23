@@ -3,6 +3,7 @@ import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
 import { useContext } from 'react';
 import { CartContext } from '../../context/cart-context';
+import { Link } from 'react-router-dom'
 
 const CartDropDown = () =>
 {
@@ -14,8 +15,10 @@ const CartDropDown = () =>
             <div className='cart-items'>
                 {cartItems.map(item => <CartItem key={item.id} cartItem={item} />)}
             </div>
-            <Button buttonType='inverted'> GO TO CHECKOUT </Button>
-        </div>
+            <Link className="checkout-link" to={"/checkout"}>
+                GO TO CHECKOUT
+            </Link>
+        </div >
     )
 
 }

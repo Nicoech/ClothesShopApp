@@ -26,9 +26,23 @@
         overflow: scroll;
     }
 
-    button
+    .checkout-link
     {
-        margin-top: auto;
-        letter-spacing: 0;
+        padding: 10px 15px;
+        cursor: pointer;
+        margin: 15px 10px 10px 10px;
+        text-decoration: none;
+        color: black;
+        border: 2px solid;
+        display: block;
+
+        &:hover
+        {
+            transition: 500ms;
+            background-color: black;
+            opacity: 1;
+            color: white;
+        }
     }
+
 }
